@@ -31,9 +31,15 @@ extend-exclude = ['migrations']
 preview = true
 select = ['I', 'F', 'E', 'W', 'PL', 'PT']
 
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+combine-as-imports = true
+
 [tool.ruff.format]
+docstring-code-format = true
 preview = true
 quote-style = 'single'
+
 
 [tool.taskipy.tasks]
 lint = 'ruff check . && ruff check . --diff'

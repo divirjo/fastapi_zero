@@ -38,11 +38,7 @@ def test_read_users(client):
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {
         'users': [
-            {
-                'username': 'Nome Usuário',
-                'email': 'usuario@fake.com',
-                'id': 1,
-            }
+            {'username': 'Nome Usuário', 'email': 'usuario@fake.com', 'id': 1}
         ]
     }
 

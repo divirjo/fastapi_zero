@@ -2,7 +2,12 @@
     "cSpell.words": [
         "fastapi",
         "nullable",
+        "onupdate",
         "pydantic",
         "sqlalchemy"
-    ]
+    ],
+    "[python]": {
+        "args": ["--config=pyproject.toml"],
+    }
 }
+
