@@ -4,7 +4,6 @@ from fastapi_zero.models import User
 
 
 def test_create_user(session):
-
     user = User(
         username='test_user',
         email='primeiro_user@divirjo.com.br',
@@ -17,4 +16,4 @@ def test_create_user(session):
         select(User).where(User.email == 'primeiro_user@divirjo.com.br')
     )
 
-    assert result.username == 'test_user' d
+    assert result.username == 'test_user'
