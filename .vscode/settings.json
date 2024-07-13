@@ -3,8 +3,10 @@
         "fastapi",
         "nullable",
         "onupdate",
+        "poolclass",
         "pydantic",
-        "sqlalchemy"
+        "sqlalchemy",
+        "sqlite"
     ],
     "[python]": {
         "args": ["--config=pyproject.toml"],

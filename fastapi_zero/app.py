@@ -2,6 +2,7 @@ from http import HTTPStatus
 
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from fastapi_zero.database import get_session
 from fastapi_zero.models import User
@@ -25,13 +26,12 @@ def read_root():
 
 @app.post('/users/', status_code=HTTPStatus.CREATED, response_model=UserPublic)
 # Schema é checado ao enviar as informações UserPublic
-def create_user(user: UserSchema, session=Depends(get_session)):
+def create_user(user: UserSchema, session: Session = Depends(get_session)):
     db_user = session.scalar(
-                select(User).where(
-                    (User.username == user.username) |
-                    (User.email == user.email)
-                )
-            )
+        select(User).where(
+            (User.username == user.username) | (User.email == user.email)
+        )
+    )
 
     if db_user:
         if db_user.username == user.username:
@@ -39,7 +39,7 @@ def create_user(user: UserSchema, session=Depends(get_session)):
                 status_code=HTTPStatus.BAD_REQUEST,
                 detail='Username already exists',
             )
-        if db_user.email == user.email:
+        elif db_user.email == user.email:
             raise HTTPException(
                 status_code=HTTPStatus.BAD_REQUEST,
                 detail='Email already exists',
