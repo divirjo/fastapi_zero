@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict, EmailStr
 
 
 class Message(BaseModel):
@@ -11,14 +11,12 @@ class UserSchema(BaseModel):
     password: str
 
 
-class UserDB(UserSchema):
-    id: int
-
-
 class UserPublic(BaseModel):
     id: int
     username: str
     email: EmailStr
+    # configura que ao validar objetos do tipo UserPublic, as informações serão # extraídas dos atributos da classe para um dicionário  # noqa: E501
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserList(BaseModel):

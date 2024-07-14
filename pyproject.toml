@@ -42,11 +42,11 @@ quote-style = 'single'
 
 
 [tool.taskipy.tasks]
-lint = 'ruff check . && ruff check . --diff'
-format = 'ruff check . --fix && ruff format .'
+lint = 'ruff check .; ruff check . --diff'
+format = 'ruff check . --fix; ruff format .'
 run = 'fastapi dev fastapi_zero/app.py'
 pre_test = 'task lint'
-test = 'pytest -s -x --cov=fastapi_zero -vv'
+test = 'pytest -s --cov=fastapi_zero -vv'
 post_test = 'coverage html'
 
 [build-system]
