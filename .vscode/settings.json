@@ -3,6 +3,7 @@
         "fastapi",
         "nullable",
         "onupdate",
+        "Oswaldinho",
         "poolclass",
         "pydantic",
         "sqlalchemy",

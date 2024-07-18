@@ -6,6 +6,8 @@ from fastapi_zero.settings import Settings
 engine = create_engine(Settings().DATABASE_URL)
 
 
-def get_session():
+def get_session():  # pragma: no cover
+    # pragma é uma anotação para o coverage do teste ignorar funções que não
+    # tem como testar
     with Session(engine) as session:
         yield session
