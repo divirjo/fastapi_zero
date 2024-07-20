@@ -5,6 +5,7 @@
         "onupdate",
         "Oswaldinho",
         "poolclass",
+        "pwdlib",
         "pydantic",
         "sqlalchemy",
         "sqlite"
