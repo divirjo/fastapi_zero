@@ -9,6 +9,13 @@ def test_jwt():
     data = {'test': 'test'}
     token = create_access_token(data)
 
+    """
+    Para gerar a SECRET_KEY no .env:
+    (1) executar o python
+    (2) import secrets
+    (3) secretes
+    (4) secrets.token_hex(256)
+    """
     decoded = decode(
         token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
     )

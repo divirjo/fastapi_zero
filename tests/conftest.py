@@ -1,3 +1,4 @@
+import factory
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -42,10 +43,25 @@ def session():
 
 @pytest.fixture()
 def user(session):
-    pwd = 'canoa'
-    user = User(
-        username='Teste',
-        email='teste@test.com',
+    pwd = 'canoa'  # definimos uma senha pois precisamos do valor exato
+    user = UserFactory(
+        password=get_password_hash(pwd),
+    )
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+
+    # Monkey Patch - alteração de objeto em tempo
+    # de execução. Só existe nessa instância do objeto dentro da fixture
+    user.clean_password = pwd
+
+    return user
+
+
+@pytest.fixture()
+def other_user(session):
+    pwd = 'canoa'  # definimos uma senha pois precisamos do valor exato
+    user = UserFactory(
         password=get_password_hash(pwd),
     )
     session.add(user)
@@ -69,3 +85,14 @@ def token(client, user):
         },
     )
     return response.json()['access_token']
+
+
+class UserFactory(factory.Factory):
+    class Meta:
+        model = User
+
+    username = factory.Sequence(lambda n: f'test{n}')
+    # LazyAttribute - atributo que é gerado após o objeto ser criado
+    # obj é semelhante ao self
+    email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
+    password = factory.LazyAttribute(lambda obj: f'{obj.username}#test')
