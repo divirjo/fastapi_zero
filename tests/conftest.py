@@ -60,17 +60,10 @@ def user(session):
 
 @pytest.fixture()
 def other_user(session):
-    pwd = 'canoa'  # definimos uma senha pois precisamos do valor exato
-    user = UserFactory(
-        password=get_password_hash(pwd),
-    )
+    user = UserFactory()
     session.add(user)
     session.commit()
     session.refresh(user)
-
-    # Monkey Patch - alteração de objeto em tempo
-    # de execução. Só existe nessa instância do objeto dentro da fixture
-    user.clean_password = pwd
 
     return user
 

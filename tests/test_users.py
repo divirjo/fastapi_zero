@@ -61,15 +61,16 @@ def test_list_users_without_users(client):
     assert response.json() == {'users': []}
 
 
-def test_list_users_with_user(client, user):
+def test_list_users_with_user(client, user, other_user):
     # valida e converte usuário do BD em schema do pydantic
     user_schema = UserPublic.model_validate(user).model_dump()
+    other_user_schema = UserPublic.model_validate(other_user).model_dump()
     response = client.get(
         '/users/',
     )
 
     assert response.status_code == HTTPStatus.OK
-    assert response.json() == {'users': [user_schema]}
+    assert response.json() == {'users': [user_schema, other_user_schema]}
 
 
 def test_read_user(client, user):
