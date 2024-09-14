@@ -18,6 +18,12 @@ from fastapi_zero.security import (
     get_password_hash,
 )
 
+"""
+Para uma aplicação mais robusta, é mais interessante implementar a autenticação
+pelo FastAPIusers:
+https://fastapi-users.github.io/fastapi-users/latest/
+"""
+
 router = APIRouter(
     prefix='/users',
     tags=['users'],  # identifica o grupo de rotas para a documentação
