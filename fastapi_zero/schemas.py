@@ -22,6 +22,10 @@ class TodoPublic(TodoSchema):
     id: int
 
 
+class TodoList(BaseModel):
+    todos: list[TodoPublic]
+
+
 class UserSchema(BaseModel):
     username: str
     email: EmailStr

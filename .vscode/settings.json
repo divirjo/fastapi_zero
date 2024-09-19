@@ -11,7 +11,8 @@
         "pwdlib",
         "pydantic",
         "sqlalchemy",
-        "sqlite"
+        "sqlite",
+        "todostate"
     ],
     "[python]": {
         "args": ["--config=pyproject.toml"],
