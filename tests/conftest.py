@@ -1,4 +1,5 @@
 import factory
+import factory.fuzzy
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -7,7 +8,7 @@ from sqlalchemy.pool import StaticPool
 
 from fastapi_zero.app import app
 from fastapi_zero.database import get_session
-from fastapi_zero.models import User, table_registry
+from fastapi_zero.models import Todo, TodoState, User, table_registry
 from fastapi_zero.security import get_password_hash
 
 
@@ -78,6 +79,21 @@ def token(client, user):
         },
     )
     return response.json()['access_token']
+
+
+class TodoFactory(factory.Factory):
+    class Meta:
+        model = Todo
+
+    """
+    É possível gerar textos aleatórios em português, inclusive CPF e cartões
+    de crédito.
+    Para mais informações ver Faker: https://faker.readthedocs.io/en/master/
+    """
+    title = factory.Faker('text')  # inclui um texto aleatório
+    description = factory.Faker('text')
+    state = factory.fuzzy.FuzzyChoice(TodoState)  # inclui um valor aleatório
+    user_id = 1
 
 
 class UserFactory(factory.Factory):
