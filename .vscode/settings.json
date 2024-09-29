@@ -12,6 +12,7 @@
         "pydantic",
         "sqlalchemy",
         "sqlite",
+        "timespec",
         "todostate"
     ],
     "[python]": {

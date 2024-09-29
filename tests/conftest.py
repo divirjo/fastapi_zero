@@ -11,6 +11,14 @@ from fastapi_zero.database import get_session
 from fastapi_zero.models import Todo, TodoState, User, table_registry
 from fastapi_zero.security import get_password_hash
 
+"""
+Para criar um ponto de interrupção, o comando no python é breakpoint()
+esse comando ativa o debugger do python (pdb)
+
+https://pt.stackoverflow.com/questions/504879/pra-que-serve-a-fun%C3%A7%C3%A3o-breakpoint
+https://docs.python.org/3/library/pdb.html
+"""
+
 
 @pytest.fixture()
 def client(session):
